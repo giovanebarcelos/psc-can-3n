@@ -27,6 +27,5 @@ public class Utl {
                 System.out.println(msgErro);
             }
         }
-
     }
 }

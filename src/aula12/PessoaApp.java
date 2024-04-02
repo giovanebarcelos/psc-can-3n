@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class PessoaApp {
     private ArrayList<Pessoa> pessoas =
             new ArrayList<Pessoa>();
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         PessoaApp pessoa = new PessoaApp();
         int opcao = 0;
         while (opcao != 9) {
@@ -28,11 +29,11 @@ public class PessoaApp {
     }
 
     private void listar() {
-        for (Pessoa pessoa: pessoas){
+        for (Pessoa pessoa : pessoas) {
             System.out.println("------");
             System.out.println("Codigo: " + pessoa.codigo);
             System.out.println("Nome: " + pessoa.nome);
-            if (pessoa instanceof PessoaFisica){
+            if (pessoa instanceof PessoaFisica) {
                 System.out.printf("CPF: " +
                         ((PessoaFisica) pessoa).CPF);
             } else {
@@ -44,16 +45,27 @@ public class PessoaApp {
 
     private void incluir() {
         System.out.println("--- Incluir Pessoa ---");
-        int codigo = Utl.getInt("Codigo: ");
+        int codigo = 0;
+        while (codigo == 0) {
+            try {
+                codigo = Utl.getInt("Codigo: ");
+                if (existPessoa(codigo)) {
+                    throw new Exception("Codigo ja existe!");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                codigo = 0;
+            }
+        }
         String nome = Utl.getString("Nome: ");
-        String pfOUpj = Utl.getString( "PF ou PJ? ",
+        String pfOUpj = Utl.getString("PF ou PJ? ",
                 new String[]{"PF", "PJ"},
                 "Digite PF ou PJ");
         boolean isPF = "PF".equals(pfOUpj);
         String idPfOuPj = Utl.getString(
-                isPF ? "CPF: ": "CNPJ: ");
+                isPF ? "CPF: " : "CNPJ: ");
         Pessoa pessoa;
-        if (isPF){
+        if (isPF) {
             pessoa = new PessoaFisica(
                     codigo, nome, idPfOuPj);
         } else {
@@ -62,9 +74,18 @@ public class PessoaApp {
         }
         String sn = Utl.getString("Salvar <S/N>? ",
                 new String[]{"S", "N"}, "Digite S ou N");
-        if ("S".equals(sn)){
+        if ("S".equals(sn)) {
             pessoas.add(pessoa);
         }
+    }
+
+    private boolean existPessoa(int codigo) {
+        for (Pessoa pessoa: this.pessoas){
+            if (pessoa.codigo == codigo){
+                return true;
+            }
+        }
+        return false;
     }
 
     private int menu() {
