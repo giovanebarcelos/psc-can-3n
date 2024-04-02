@@ -16,13 +16,28 @@ public class PessoaApp {
                     pessoa.incluir();
                     break;
                 case 2:
-                    //pessoa.listar();
+                    pessoa.listar();
                     System.out.println("Listar");
                     break;
                 case 9:
                     break;
                 default:
                     System.out.println("Opcao Invalida!");
+            }
+        }
+    }
+
+    private void listar() {
+        for (Pessoa pessoa: pessoas){
+            System.out.println("------");
+            System.out.println("Codigo: " + pessoa.codigo);
+            System.out.println("Nome: " + pessoa.nome);
+            if (pessoa instanceof PessoaFisica){
+                System.out.printf("CPF: " +
+                        ((PessoaFisica) pessoa).CPF);
+            } else {
+                System.out.printf("CNPJ: " +
+                        ((PessoaJuridica) pessoa).CNPJ);
             }
         }
     }
