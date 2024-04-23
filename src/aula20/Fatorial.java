@@ -13,7 +13,8 @@ public class Fatorial {
                 break;
             }
             //int numFatorial = fatorial(numero);
-            int numFatorial = fatorialFor(numero);
+            //int numFatorial = fatorialFor(numero);
+            int numFatorial = fatorialDoWhile(numero);
             System.out.printf(
                     "Fatorial de %d eh %d\n",
                     numero, numFatorial);
@@ -37,6 +38,16 @@ public class Fatorial {
              fator++){
             fatorial = fatorial * fator;
         }
+        return fatorial;
+    }
+
+    public static int fatorialDoWhile(int numero){
+        int fator = 1, fatorial = 1;
+        do {
+            fatorial = fatorial * fator;
+            fator++;
+        } while (fator <= numero);
+
         return fatorial;
     }
 }
