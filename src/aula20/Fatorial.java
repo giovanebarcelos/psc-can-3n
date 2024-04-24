@@ -14,7 +14,8 @@ public class Fatorial {
             }
             //int numFatorial = fatorial(numero);
             //int numFatorial = fatorialFor(numero);
-            int numFatorial = fatorialDoWhile(numero);
+            //int numFatorial = fatorialDoWhile(numero);
+            int numFatorial = fatorialRecursivo(numero);
             System.out.printf(
                     "Fatorial de %d eh %d\n",
                     numero, numFatorial);
@@ -22,7 +23,7 @@ public class Fatorial {
 
     }
 
-    public static int fatorial(int numero){
+    public static int fatorialWhile(int numero){
         int fator = 1, fatorial = 1;
         while (fator <= numero){
             fatorial = fatorial * fator;
