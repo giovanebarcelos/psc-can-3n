@@ -12,10 +12,10 @@ public class Fatorial {
             if (numero < 1){
                 break;
             }
-            //int numFatorial = fatorial(numero);
+            int numFatorial = fatorialWhile(numero);
             //int numFatorial = fatorialFor(numero);
             //int numFatorial = fatorialDoWhile(numero);
-            int numFatorial = fatorialRecursivo(numero);
+            //int numFatorial = fatorialRecursivo(numero);
             System.out.printf(
                     "Fatorial de %d eh %d\n",
                     numero, numFatorial);
