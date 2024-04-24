@@ -50,4 +50,12 @@ public class Fatorial {
 
         return fatorial;
     }
+
+    public static int fatorialRecursivo(int numero){
+        if (numero < 2){
+            return numero;
+        }
+
+        return (numero * fatorialRecursivo(numero - 1));
+    }
 }
