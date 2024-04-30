@@ -20,7 +20,6 @@ public class Fatorial {
                     "Fatorial de %d eh %d\n",
                     numero, numFatorial);
         }
-
     }
 
     public static int fatorialWhile(int numero){
