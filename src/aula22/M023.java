@@ -24,4 +24,7 @@ pontos obtidos.
  */
 
 public class M023 {
+    public static void main(String[] args) {
+
+    }
 }
