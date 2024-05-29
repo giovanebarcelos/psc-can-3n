@@ -13,7 +13,7 @@ public class R011 {
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
 
-        System.out.print("Digite um valor: ");
+        System.out.print("Digite um número: ");
         int numero = read.nextInt();
 
         int somaPares = 0;
