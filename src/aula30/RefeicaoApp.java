@@ -18,7 +18,7 @@ public class RefeicaoApp {
         this.refeicoes = new ArrayList<Refeicao>();
 
         this.refeicoes.add(new Refeicao(
-          1, "Vegetariano", 180, TipoRefeicao.Prato));
+                1, "Vegetariano", 180, TipoRefeicao.Prato));
         this.refeicoes.add(new Refeicao(
                 2, "Peixe", 230, TipoRefeicao.Prato));
         this.refeicoes.add(new Refeicao(
@@ -45,7 +45,31 @@ public class RefeicaoApp {
                 4, "Refrigente Diet", 65, TipoRefeicao.Bebida));
     }
 
-    public void lerRefeicoes() {
+    private void lerRefeicoes() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            this.lerRefeicao();
+
+            String sn;
+
+            while (true) {
+                System.out.print("Fazer novo cálculo <S/N>? ");
+                sn = scanner.next().toUpperCase();
+
+                if ("S".equals(sn) || "N".equals(sn)) {
+                    break;
+                } else {
+                    System.out.println("Digite S para Sim e N para Não!");
+                }
+            }
+
+            if ("N".equals(sn)){
+                break;
+            }
+        }
+    }
+
+    private void lerRefeicao() {
         System.out.println("== Refeicao ==\n");
         Refeicao prato = this.lerRefeicao(TipoRefeicao.Prato);
         Refeicao sobremesa = this.lerRefeicao(TipoRefeicao.Sobremesa);
@@ -56,7 +80,7 @@ public class RefeicaoApp {
         comanda.add(sobremesa);
         comanda.add(bebida);
 
-        System.out.printf("Total de calorias da refeição: %d",
+        System.out.printf("Total de calorias da refeição: %d\n\n",
                 this.getTotalCalorias());
     }
 
@@ -64,7 +88,7 @@ public class RefeicaoApp {
         Refeicao refeicao;
         do {
             Scanner scanner = new Scanner(System.in);
-            System.out.print(tipoRefeicao.name() + ": ");
+            System.out.print(tipoRefeicao.name() + ": \n");
             this.listarRefeicoes(tipoRefeicao);
             System.out.printf("Digite o código da opção de %s: ",
                     tipoRefeicao.name());
@@ -82,14 +106,35 @@ public class RefeicaoApp {
     }
 
     private void listarRefeicoes(TipoRefeicao tipo) {
+        for (Refeicao refeicao : this.refeicoes) {
+            if (refeicao.getTipo().equals(tipo)) {
+                System.out.printf("%d - %s\n",
+                        refeicao.getCodigo(),
+                        refeicao.getNome());
+            }
+        }
 
     }
 
-    private Refeicao getRefeicao(TipoRefeicao tipo, int codigo) {
+    private Refeicao getRefeicao(TipoRefeicao tipo,
+                                 int codigo) {
+        for (Refeicao refeicao : this.refeicoes) {
+            if (refeicao.getTipo().equals(tipo)
+                    && refeicao.getCodigo() == codigo) {
+                return refeicao;
+            }
+        }
+
         return null;
     }
 
     private int getTotalCalorias() {
-        return 0;
+        int totalCalorias = 0;
+
+        for (Refeicao refeicao : this.comanda) {
+            totalCalorias += refeicao.getQtdeCalorias();
+        }
+
+        return totalCalorias;
     }
 }
